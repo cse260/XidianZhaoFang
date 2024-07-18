@@ -1,0 +1,54 @@
+package com.cse260.lease.web.app.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cse260.lease.model.entity.BrowsingHistory;
+import com.cse260.lease.web.app.mapper.BrowsingHistoryMapper;
+import com.cse260.lease.web.app.service.BrowsingHistoryService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cse260.lease.web.app.vo.history.HistoryItemVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+/**
+ * @Author cse
+ * @description 针对表【browsing_history(浏览历史)】的数据库操作Service实现
+ * @createDate 2024-06-26 11:12:39
+ */
+@Service
+public class BrowsingHistoryServiceImpl extends ServiceImpl<BrowsingHistoryMapper, BrowsingHistory>
+        implements BrowsingHistoryService {
+
+    @Autowired
+    private BrowsingHistoryMapper browsingHistoryMapper;
+
+    @Override
+    public IPage<HistoryItemVo> pageItemByUserId(Page<HistoryItemVo> page, Long userId) {
+        return browsingHistoryMapper.pageItemByUserId(page,userId);
+    }
+
+    @Override
+    @Async
+    //userId对应用户id，id对应房间id
+    public void saveHistory(Long userId, Long id) {
+        LambdaQueryWrapper<BrowsingHistory> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(BrowsingHistory::getUserId,userId);
+        queryWrapper.eq(BrowsingHistory::getRoomId,id);
+        BrowsingHistory browsingHistory = browsingHistoryMapper.selectOne(queryWrapper);
+
+        if(browsingHistory!=null){
+            browsingHistory.setBrowseTime(new Date());
+            browsingHistoryMapper.updateById(browsingHistory);
+        }else{
+            BrowsingHistory history = new BrowsingHistory();
+            history.setUserId(userId);
+            history.setRoomId(id);
+            history.setBrowseTime(new Date());
+            browsingHistoryMapper.insert(history);
+        }
+    }
+}
