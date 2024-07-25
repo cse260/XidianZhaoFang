@@ -38,6 +38,15 @@ public class JwtUtil {
         }
     }
     public static void main(String[] args) {
-        System.out.println(createToken(8L,"18201127922"));
+        System.out.println(createToken(9L,"18201127922"));
+        System.out.println(createToken(10L,"18201127922"));
+        System.out.println(createToken(11L,"18201127922"));
+        System.out.println(createToken(12L,"18201127922"));
+        System.out.println(createToken(13L,"18201127922"));
+        System.out.println(createToken(14L,"18201127922"));
+        System.out.println(createToken(15L,"18201127922"));
+        System.out.println(createToken(16L,"18201127922"));
+        System.out.println(createToken(17L,"18201127922"));
+
     }
 }

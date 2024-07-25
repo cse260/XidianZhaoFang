@@ -34,6 +34,9 @@
         <minio.version>8.2.0</minio.version>
         <knife4j.version>4.1.0</knife4j.version>
         <aliyun.sms.version>2.0.23</aliyun.sms.version>
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <cn.hutool.version>5.7.6</cn.hutool.version>
+
     </properties>
 
     <!--配置dependencyManagement统一管理依赖版本-->
@@ -98,6 +101,20 @@
                 <artifactId>dysmsapi20170525</artifactId>
                 <version>${aliyun.sms.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax.validation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${cn.hutool.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 </project>

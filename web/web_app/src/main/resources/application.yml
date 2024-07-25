@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: 
-    username: 
-    password: 
+    url:
+    username:
+    password:
     hikari:
       connection-test-query: SELECT 1 # 自动检测连接
       connection-timeout: 60000 #数据库连接超时时间,默认30秒
@@ -22,6 +22,19 @@ spring:
       host: 192.168.115.101
       port: 6379
       database: 0
+  rabbitmq:
+    host: 192.168.115.101
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    connection-timeout: 600000
+    listener:
+      simple:
+        retry:
+          max-attempts: 3 #设置最大尝试消费次数
+          enabled: true #开启重试
+          stateless: false
 
 #用于打印框架生成的sql语句，便于调试
 mybatis-plus:

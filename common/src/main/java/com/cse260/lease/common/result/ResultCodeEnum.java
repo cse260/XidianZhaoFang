@@ -31,6 +31,10 @@ public enum ResultCodeEnum {
 
     ADMIN_APARTMENT_DELETE_ERROR(310,"请先删除房间"),
 
+    ADMIN_COUPON_UPDATE_ERROR(311,"只有待发放状态才能修改"),
+    ADMIN_COUPON_EXIST_ERROR(312,"优惠券不存在"),
+    ADMIN_COUPON_ISSUE_ERROR(313,"只有待发放和暂停状态才能发放"),
+
     APP_LOGIN_AUTH(501, "未登陆"),
     APP_LOGIN_PHONE_EMPTY(502, "手机号码为空"),
     APP_LOGIN_CODE_EMPTY(503, "验证码为空"),
@@ -39,7 +43,9 @@ public enum ResultCodeEnum {
     APP_LOGIN_CODE_ERROR(506, "验证码错误"),
     APP_ACCOUNT_DISABLED_ERROR(507, "该用户已被禁用"),
 
-
+    APP_COUPON_STATUS_ERROR(508,"该优惠券未开始发放或已过期"),
+    APP_COUPON_COUNT_LACK(509,"该优惠券库存不足"),
+    APP_COUPON_EXCEED_LIMIT(510,"超过限领数量"),
     TOKEN_EXPIRED(601, "token过期"),
     TOKEN_INVALID(602, "token非法");
 

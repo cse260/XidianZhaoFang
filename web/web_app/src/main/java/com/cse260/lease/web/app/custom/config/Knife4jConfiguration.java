@@ -54,4 +54,15 @@ public class Knife4jConfiguration {
                 ).
                 build();
     }
+
+
+    @Bean
+    public GroupedOpenApi CouponAPI() {
+        return GroupedOpenApi.builder().group("优惠券信息").
+                pathsToMatch(
+                        "/app/coupons/**",
+                        "/app/user-coupons/**"
+                ).
+                build();
+    }
 }
